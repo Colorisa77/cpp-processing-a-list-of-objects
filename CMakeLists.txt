@@ -8,4 +8,6 @@ add_executable(processing_a_list_of_objects main.cpp
         object_processor.cpp
         object_processor.h
         common.h
+        request_handler.cpp
+        request_handler.h
 )
