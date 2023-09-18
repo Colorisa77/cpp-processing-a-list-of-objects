@@ -11,24 +11,18 @@ namespace object_processor {
         return std::sqrt(pos_x * pos_x + pos_y * pos_y);
     }
 
-    void ObjectProcessor::ReadFromFile(const std::string &file_name) {
-        std::ifstream file(file_name, std::ios::in);
-        if (!file.good()) {
-            file.close();
-            throw std::runtime_error("Can not open file " + file_name);
-        }
-        while (!file.eof()) {
+    void ObjectProcessor::ReadFromFile(std::istream& input) {
+        while (!input.eof()) {
             std::string line;
-            std::getline(file, line);
-            std::istringstream input(line);
-            auto object = GetObjectFromLine(input);
+            std::getline(input, line);
+            std::istringstream stream(line);
+            auto object = GetObjectFromLine(stream);
             if(object_map_by_name_.count(object.object_name) == 0) {
                 objects_.push_back(std::move(object));
                 object_map_by_name_[objects_.back().object_name] = &objects_.back();
                 object_map_by_type_[objects_.back().object_type].insert(objects_.back().object_name);
             }
         }
-        file.close();
     }
 
     ObjectData ObjectProcessor::GetObjectFromLine(std::istream &input) const {

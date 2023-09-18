@@ -5,12 +5,7 @@ namespace request_handler {
     : db_(object_processor) {
     }
 
-void RequestHandler::OutputSortedByNameData() const {
-    std::ofstream output("output_file", std::ios::out);
-    if(!output.good()) {
-        throw std::runtime_error("Can create file output_file");
-    }
-
+void RequestHandler::OutputSortedByNameData(std::ofstream& output) const {
     auto sorted_by_name = db_.GetSortedByNameData();
     for(const auto& [ch, list] : sorted_by_name) {
         if(!list.empty()) {
@@ -23,12 +18,7 @@ void RequestHandler::OutputSortedByNameData() const {
     }
 }
 
-    void RequestHandler::OutputSortedByTypeData() const {
-        std::ofstream output("output_file", std::ios::out);
-        if(!output.good()) {
-            throw std::runtime_error("Can create file output_file");
-        }
-
+    void RequestHandler::OutputSortedByTypeData(std::ofstream& output) const {
         auto sorted_by_name = db_.GetSortedByTypeData();
         for(const auto& [type, list] : sorted_by_name) {
             if(!list.empty()) {
@@ -41,12 +31,7 @@ void RequestHandler::OutputSortedByNameData() const {
         }
     }
 
-    void RequestHandler::OutputSortedByDistanceData() const {
-        std::ofstream output("output_file", std::ios::out);
-        if(!output.good()) {
-            throw std::runtime_error("Can create file output_file");
-        }
-
+    void RequestHandler::OutputSortedByDistanceData(std::ofstream& output) const {
         auto sorted_by_name = db_.GetSortedByDistanceData();
         for(const auto& [distance, list] : sorted_by_name) {
             if(!list.empty()) {
@@ -59,12 +44,7 @@ void RequestHandler::OutputSortedByNameData() const {
         }
     }
 
-    void RequestHandler::OutputSortedByTimeData() const {
-        std::ofstream output("output_file", std::ios::out);
-        if(!output.good()) {
-            throw std::runtime_error("Can create file output_file");
-        }
-
+    void RequestHandler::OutputSortedByTimeData(std::ofstream& output) const {
         auto sorted_by_name = db_.GetSortedByByTimeData();
         for(const auto& [data, list] : sorted_by_name) {
             if(!list.empty()) {

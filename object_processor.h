@@ -36,7 +36,7 @@ namespace object_processor {
     public:
         ObjectProcessor() = default;
 
-        void ReadFromFile(const std::string& file_name);
+        void ReadFromFile(std::istream& input);
 
         ObjectsSortedByName GetSortedByNameData() const;
         SortedObjects GetSortedByTypeData() const;
