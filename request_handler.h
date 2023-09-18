@@ -8,14 +8,14 @@ namespace request_handler {
     public:
         RequestHandler(const object_processor::ObjectProcessor& object_processor);
 
-        void OutPutSortedByNameData() const;
-        void OutPutSortedByTypeData() const;
-        void OutPutSortedByDistanceData() const;
-        void OutPutSortedByTimeData() const;
+        void OutputSortedByNameData() const;
+        void OutputSortedByTypeData() const;
+        void OutputSortedByDistanceData() const;
+        void OutputSortedByTimeData() const;
 
     private:
         const object_processor::ObjectProcessor& db_;
 
-        void OutPutObject(std::ostream& output,std::string_view name) const;
+        void OutputObject(std::ostream& output,std::string_view name) const;
     };
 } // namespace request_handler

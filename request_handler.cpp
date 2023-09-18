@@ -5,7 +5,7 @@ namespace request_handler {
     : db_(object_processor) {
     }
 
-void RequestHandler::OutPutSortedByNameData() const {
+void RequestHandler::OutputSortedByNameData() const {
     std::ofstream output("output_file", std::ios::out);
     if(!output.good()) {
         throw std::runtime_error("Can create file output_file");
@@ -16,14 +16,14 @@ void RequestHandler::OutPutSortedByNameData() const {
         if(!list.empty()) {
             output << "Буква "s << ch << '\n';
             for(const auto name : list) {
-                OutPutObject(output, name);
+                OutputObject(output, name);
             }
             output << '\n';
         }
     }
 }
 
-    void RequestHandler::OutPutSortedByTypeData() const {
+    void RequestHandler::OutputSortedByTypeData() const {
         std::ofstream output("output_file", std::ios::out);
         if(!output.good()) {
             throw std::runtime_error("Can create file output_file");
@@ -34,14 +34,14 @@ void RequestHandler::OutPutSortedByNameData() const {
             if(!list.empty()) {
                 output << "Тип объекта - "s << type << '\n';
                 for(const auto name : list) {
-                    OutPutObject(output, name);
+                    OutputObject(output, name);
                 }
                 output << '\n';
             }
         }
     }
 
-    void RequestHandler::OutPutSortedByDistanceData() const {
+    void RequestHandler::OutputSortedByDistanceData() const {
         std::ofstream output("output_file", std::ios::out);
         if(!output.good()) {
             throw std::runtime_error("Can create file output_file");
@@ -52,14 +52,14 @@ void RequestHandler::OutPutSortedByNameData() const {
             if(!list.empty()) {
                 output << "До "s << distance << " ед."s << '\n';
                 for(const auto name : list) {
-                    OutPutObject(output, name);
+                    OutputObject(output, name);
                 }
                 output << '\n';
             }
         }
     }
 
-    void RequestHandler::OutPutSortedByTimeData() const {
+    void RequestHandler::OutputSortedByTimeData() const {
         std::ofstream output("output_file", std::ios::out);
         if(!output.good()) {
             throw std::runtime_error("Can create file output_file");
@@ -70,14 +70,14 @@ void RequestHandler::OutPutSortedByNameData() const {
             if(!list.empty()) {
                 output << data << '\n';
                 for(const auto name : list) {
-                    OutPutObject(output, name);
+                    OutputObject(output, name);
                 }
                 output << '\n';
             }
         }
     }
 
-    void RequestHandler::OutPutObject(std::ostream& output,std::string_view name) const {
+    void RequestHandler::OutputObject(std::ostream& output,std::string_view name) const {
         const auto* object = db_.GetObjectByName(name);
         output << object->object_name << ' ';
         output << object->pos_x << ' ';
