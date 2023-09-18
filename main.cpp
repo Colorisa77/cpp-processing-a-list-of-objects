@@ -2,8 +2,6 @@
 
 #include "object_processor.h"
 #include "request_handler.h"
-#include <fstream>
-
 
 void PrintUsage(std::ostream& output = std::cerr) {
     output << "The run argument must be the input file name and the output file name\n"s;
@@ -22,13 +20,6 @@ void RunProgram(const std::string& input_file_name, const std::string& output_fi
 
     request_handler::RequestHandler request_handler(object_processor);
 
-    std::ofstream output_file(output_file_name, std::ios::out);
-
-    if(!output_file.good()) {
-        input_file.close();
-        throw std::runtime_error("Can not open file "s + output_file_name);
-    }
-
     while(true) {
 
         std::cout << "Выберите действие "s << std::endl;
@@ -41,6 +32,13 @@ void RunProgram(const std::string& input_file_name, const std::string& output_fi
 
         int choice;
         std::cin >> choice;
+
+        std::ofstream output_file(output_file_name, std::ios::out);
+
+        if(!output_file.good()) {
+            input_file.close();
+            throw std::runtime_error("Can not open file "s + output_file_name);
+        }
 
         std::cout << '\n';
 
