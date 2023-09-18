@@ -2,11 +2,9 @@
 
 #include "common.h"
 
+#include <chrono>
 #include <set>
 #include <string_view>
-#include <algorithm>
-#include <cmath>
-#include <chrono>
 #include <deque>
 #include <map>
 #include <unordered_map>
@@ -15,11 +13,10 @@ using namespace std::literals;
 
 namespace object_processor {
 
-    double ComputeDistance(double pos_x, double pos_y) {
-        return std::sqrt(pos_x * pos_x + pos_y * pos_y);
-    }
+    double ComputeDistance(double pos_x, double pos_y);
 
     class ObjectProcessor {
+    private:
         using ObjectMapByType = std::unordered_map<std::string, std::set<std::string_view>>;
         using ObjectMapByName = std::unordered_map<std::string_view, const ObjectData*>;
 
@@ -36,9 +33,6 @@ namespace object_processor {
         const int SECONDS_IN_WEEK = SECONDS_IN_DAY * 7;
         const int SECONDS_IN_MONTH = SECONDS_IN_DAY * 30;
         const int SECONDS_IN_YEAR = SECONDS_IN_DAY * 365;
-
-
-
     public:
         ObjectProcessor() = default;
 
@@ -49,7 +43,7 @@ namespace object_processor {
         SortedObjects GetSortedByDistanceData() const;
         SortedObjects GetSortedByByTimeData() const;
 
-        const ObjectData* GetObjectByName(const std::string_view name) const;
+        const ObjectData* GetObjectByName(std::string_view name) const;
         std::set<std::string_view> GetObjectsByType(const std::string& type) const;
 
     private:

@@ -3,8 +3,14 @@
 #include <fstream>
 #include <sstream>
 #include <vector>
+#include <algorithm>
+#include <cmath>
 
 namespace object_processor {
+    double ComputeDistance(double pos_x, double pos_y) {
+        return std::sqrt(pos_x * pos_x + pos_y * pos_y);
+    }
+
     void ObjectProcessor::ReadFromFile(const std::string &file_name) {
         std::ifstream file(file_name, std::ios::in);
         if (!file.good()) {
@@ -130,7 +136,7 @@ namespace object_processor {
         return result;
     }
 
-    const ObjectData* ObjectProcessor::GetObjectByName(const std::string_view name) const {
+    const ObjectData* ObjectProcessor::GetObjectByName(std::string_view name) const {
         return object_map_by_name_.at(name);
     }
 
