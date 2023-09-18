@@ -6,12 +6,12 @@
 namespace request_handler {
     class RequestHandler {
     public:
-        RequestHandler(const object_processor::ObjectProcessor& object_processor);
+        explicit RequestHandler(const object_processor::ObjectProcessor& object_processor);
 
-        void OutputSortedByNameData() const;
-        void OutputSortedByTypeData() const;
-        void OutputSortedByDistanceData() const;
-        void OutputSortedByTimeData() const;
+        void OutputSortedByNameData(std::ofstream& output) const;
+        void OutputSortedByTypeData(std::ofstream& output) const;
+        void OutputSortedByDistanceData(std::ofstream& output) const;
+        void OutputSortedByTimeData( std::ofstream& output) const;
 
     private:
         const object_processor::ObjectProcessor& db_;
