@@ -139,7 +139,7 @@ namespace object_processor {
     }
 
     bool ObjectProcessor::IsRussianLetter(unsigned char ch) const {
-        return (ch >= 192 && ch <= 255);
+        return (ch >= 192 && ch <= 223);
     }
 
     double ObjectProcessor::ConvertTime(std::chrono::system_clock::time_point time) const {
