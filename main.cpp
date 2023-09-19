@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdio.h>
 
 #include "object_processor.h"
 #include "request_handler.h"
@@ -24,13 +25,13 @@ void RunProgram(const std::string& input_file_name, const std::string& output_fi
 
     while(true) {
 
-        std::cout << "Выберите действие "s << std::endl;
+        std::cout << "Choose an action"s << std::endl;
 
-        std::cout << "1. Сортировка по имени"s << std::endl;
-        std::cout << "2. Сортировка по типу"s << std::endl;
-        std::cout << "3. Сортировка по расстоянию"s << std::endl;
-        std::cout << "4. Сортировка по времени"s << std::endl;
-        std::cout << "Для выхода нажмите любую другую клавишу"s << std::endl;
+        std::cout << "1. Sort by name"s << std::endl;
+        std::cout << "2. Sort by type"s << std::endl;
+        std::cout << "3. Sort by distance"s << std::endl;
+        std::cout << "4. Sort by time"s << std::endl;
+        std::cout << "Exit - any other key"s << std::endl;
 
         int choice;
         std::cin >> choice;
@@ -47,25 +48,22 @@ void RunProgram(const std::string& input_file_name, const std::string& output_fi
         switch (choice) {
             case 1:
                 request_handler.OutputSortedByNameData(output_file);
-                std::cout << "Сортировка по имени завершена\n\n"s;
                 break;
             case 2:
                 request_handler.OutputSortedByTypeData(output_file);
-                std::cout << "Сортировка по типу завершена\n\n"s;
                 break;
             case 3:
                 request_handler.OutputSortedByDistanceData(output_file);
-                std::cout << "Сортировка по расстоянию завершена\n\n"s;
                 break;
             case 4:
                 request_handler.OutputSortedByTimeData(output_file);
-                std::cout << "Сортировка по времени завершена\n\n"s;
                 break;
             default:
                 output_file.close();
-                std::cout << "Выход из программы\n"s;
+                std::cout << "\n";
                 return;
         }
+        std::cout << "Sort is complite\n\n"s;
         output_file.close();
     }
 }
