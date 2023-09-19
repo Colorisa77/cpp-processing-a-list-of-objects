@@ -10,6 +10,8 @@
 #include <iostream>
 
 namespace object_processor {
+    using namespace std::literals;
+
     double ComputeDistance(double pos_x, double pos_y) {
         return std::sqrt(pos_x * pos_x + pos_y * pos_y);
     }

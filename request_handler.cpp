@@ -3,6 +3,8 @@
 #include <iomanip>
 
 namespace request_handler {
+    using namespace std::literals;
+
     RequestHandler::RequestHandler(const object_processor::ObjectProcessor& object_processor)
     : db_(object_processor) {
     }

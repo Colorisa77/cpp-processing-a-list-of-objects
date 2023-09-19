@@ -10,7 +10,6 @@
 #include <unordered_map>
 #include <locale>
 
-using namespace std::literals;
 
 namespace object_processor {
 
@@ -44,6 +43,7 @@ namespace object_processor {
         SortedObjects GetSortedByByTimeData() const;
 
         const ObjectData* GetObjectByName(std::string_view name) const;
+
     private:
         std::deque<ObjectData> objects_;
         ObjectMapByType object_map_by_type_;

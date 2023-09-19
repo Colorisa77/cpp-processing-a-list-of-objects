@@ -3,6 +3,8 @@
 #include "object_processor.h"
 #include "request_handler.h"
 
+using namespace std::literals;
+
 void PrintUsage(std::ostream& output = std::cerr) {
     output << "The run argument must be the input file name and the output file name\n"s;
 }
