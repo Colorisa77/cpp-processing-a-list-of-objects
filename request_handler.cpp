@@ -1,5 +1,7 @@
 #include "request_handler.h"
 
+#include <iomanip>
+
 namespace request_handler {
     RequestHandler::RequestHandler(const object_processor::ObjectProcessor& object_processor)
     : db_(object_processor) {
@@ -63,7 +65,7 @@ void RequestHandler::OutputSortedByNameData(std::ofstream& output) const {
         output << object->pos_x << ' ';
         output << object->pos_y << ' ';
         output << object->object_type << ' ';
-        output << object->creation_time << '\n';
+        output << std::fixed << std::setprecision(2) << object->creation_time << '\n';
     }
 
 

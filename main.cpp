@@ -69,6 +69,7 @@ void RunProgram(const std::string& input_file_name, const std::string& output_fi
 }
 
 int main(int argc, char* argv[]) {
+    setlocale(LC_ALL, "Russian");
     if(argc != 3) {
         PrintUsage();
         return 1;

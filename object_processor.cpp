@@ -5,6 +5,9 @@
 #include <vector>
 #include <algorithm>
 #include <cmath>
+#include <locale>
+
+#include <iostream>
 
 namespace object_processor {
     double ComputeDistance(double pos_x, double pos_y) {
@@ -15,6 +18,9 @@ namespace object_processor {
         while (!input.eof()) {
             std::string line;
             std::getline(input, line);
+            if(line.empty()) {
+                return;
+            }
             std::istringstream stream(line);
             auto object = GetObjectFromLine(stream);
             if(object_map_by_name_.count(object.object_name) == 0) {
@@ -35,10 +41,11 @@ namespace object_processor {
         return obj;
     }
 
-    ObjectProcessor::ObjectsSortedByName ObjectProcessor::GetSortedByNameData() const {
-        ObjectsSortedByName result;
+    ObjectProcessor::SortedObjects ObjectProcessor::GetSortedByNameData() const {
+        SortedObjects result;
         for(const auto& [str, _] : object_map_by_name_) {
-            IsRussianLetter(str[0]) ?  result[str[0]].insert(str) : result['#'].insert(str);
+            std::string key = GetKeyForMap(str);
+            result[key].insert(str);
         }
         return result;
     }
@@ -134,12 +141,33 @@ namespace object_processor {
         return object_map_by_name_.at(name);
     }
 
-    std::set<std::string_view> ObjectProcessor::GetObjectsByType(const std::string& type) const {
-        return object_map_by_type_.at(type);
+    std::string ObjectProcessor::GetKeyForMap(std::string_view str) const {
+
+        std::string result;
+        auto byte1 = static_cast<unsigned char>(str[0]);
+        if(byte1 != 208 && byte1 != 209) {
+            result.push_back('#');
+            return result;
+        }
+        auto byte2 = static_cast<unsigned char>(str[1]);
+        if(IsRussianLetter(byte1, byte2)) {
+            result.reserve(2);
+            result.push_back(byte1);
+            result.push_back(byte2);
+            return result;
+        } else {
+            result.push_back('#');
+            return result;
+        }
     }
 
-    bool ObjectProcessor::IsRussianLetter(unsigned char ch) const {
-        return (ch >= 192 && ch <= 223);
+    bool ObjectProcessor::IsRussianLetter(unsigned char byte1, unsigned char byte2) const {
+        if(byte1 == 208) {
+            return byte2 >= 144 && byte2 <= 191;
+        } else if(byte1 == 209) {
+            return (byte2 >= 128 && byte2 <= 142) || byte2 == 145;
+        }
+        return false;
     }
 
     double ObjectProcessor::ConvertTime(std::chrono::system_clock::time_point time) const {

@@ -8,6 +8,7 @@
 #include <deque>
 #include <map>
 #include <unordered_map>
+#include <locale>
 
 using namespace std::literals;
 
@@ -20,7 +21,6 @@ namespace object_processor {
         using ObjectMapByType = std::unordered_map<std::string, std::set<std::string_view>>;
         using ObjectMapByName = std::unordered_map<std::string_view, const ObjectData*>;
 
-        using ObjectsSortedByName = std::map<char, std::set<std::string_view>>;
         using SortedObjects = std::map<std::string, std::set<std::string_view>>;
 
         const size_t MIN_COUNT_FOR_GROUP = 3;
@@ -38,21 +38,20 @@ namespace object_processor {
 
         void ReadFromFile(std::istream& input);
 
-        ObjectsSortedByName GetSortedByNameData() const;
+        SortedObjects GetSortedByNameData() const;
         SortedObjects GetSortedByTypeData() const;
         SortedObjects GetSortedByDistanceData() const;
         SortedObjects GetSortedByByTimeData() const;
 
         const ObjectData* GetObjectByName(std::string_view name) const;
-        std::set<std::string_view> GetObjectsByType(const std::string& type) const;
-
     private:
         std::deque<ObjectData> objects_;
         ObjectMapByType object_map_by_type_;
         ObjectMapByName object_map_by_name_;
 
         ObjectData GetObjectFromLine(std::istream& input) const;
-        bool IsRussianLetter(unsigned char ch) const;
+        std::string GetKeyForMap(std::string_view str) const;
+        bool IsRussianLetter(unsigned char byte1, unsigned char byte2) const;
         double ConvertTime(std::chrono::system_clock::time_point time) const;
     };
 
