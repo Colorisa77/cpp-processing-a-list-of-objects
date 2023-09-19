@@ -1,5 +1,4 @@
 #include <iostream>
-#include <stdio.h>
 
 #include "object_processor.h"
 #include "request_handler.h"
